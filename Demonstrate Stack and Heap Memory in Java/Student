@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+class Student {
+    // Instance variable -> Stored on the Heap (inside the Student object)
+    int age = 20;
+
+    public void display() {
+        // Local variable -> Stored on the Stack (inside display() method frame)
+        int marks = 85;
+        
+        System.out.println("Instance Variable (age): " + age);
+        System.out.println("Local Variable (marks): " + marks);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // 'student' reference is on the Stack, but the Student object is created on the Heap
+        Student student = new Student();
+        
+        System.out.println("Student Object Created");
+        System.out.println("Object Identity Hash Code: " + System.identityHashCode(student));
+        
+        // Calling display() pushes a new stack frame
+        student.display();
+    }
+}
