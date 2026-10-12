@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+class Employee {
+    // Instance variable -> Stored on the Heap
+    int salary;
+
+    public Employee(int salary) {
+        this.salary = salary;
+    }
+
+    public void display() {
+        // Local variable -> Stored on the Stack (inside display() stack frame)
+        int bonus = 5000;
+
+        System.out.println("\nInside display() Method:");
+        System.out.println("Salary (Instance Variable): " + salary);
+        System.out.println("Bonus (Local Variable): " + bonus);
+
+        // Local Inner Class
+        class Report {
+            public void show() {
+                System.out.println("\nReport Object Created");
+                System.out.println("Report Identity Hash Code: " + System.identityHashCode(this));
+                System.out.println("Report: Employee salary is " + salary);
+            }
+        }
+
+        // Creating Report object -> Stored on the Heap
+        Report report = new Report();
+        report.show(); // Executes in its own method frame on the Stack
+    }
+}
+
+public class Main1 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter salary: ");
+        int salary = scanner.nextInt();
+
+        System.out.print("Enter bonus: ");
+        int bonus = scanner.nextInt(); // Scanned to match interactive input requirement
+
+        // Employee object -> Stored on the Heap
+        Employee emp = new Employee(salary);
+        
+        System.out.println("\nEmployee Object Created");
+        System.out.println("Employee Identity Hash Code: " + System.identityHashCode(emp));
+
+        // Call display method
+        emp.display();
+
+        scanner.close();
+    }
+}
